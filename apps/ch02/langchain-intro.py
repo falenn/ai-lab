@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from openai import OpenAI
+from langchain_openai import ChatOpenAI
 from app.config import Config
 
 OPENAI_API_KEY = ""
@@ -14,16 +14,15 @@ def load_config():
 
 if __name__ == "__main__":  
   load_config()
+  print("Demonstrating LangChain usange")
 
-  client = OpenAI(api_key=OPENAI_API_KEY)
+  # Instantiate ChatOpenAI and reference to the LLM
+  llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY,
+                   model_name="gpt-5-nano")
   
   prompt_input = """Write a concise message to remind users to be vigilant about phishing attacks."""
-  response = client.chat.completions.create(
-    model="gpt-5-nano",
-    messages=[
-      {"role": "system", "content": "You are a helpful assistant."},
-      {"role": "user", "content": prompt_input}
-    ]
-  )
-
-  print(f"AI Response: {response}")
+  
+  print("invoking the llm")
+  response = llm.invoke(prompt_input)
+  print(response.content)
+  
