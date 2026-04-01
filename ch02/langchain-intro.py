@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 from langchain_openai import ChatOpenAI
-from app.config import Config
+from ailab.util.config import Config
 
 OPENAI_API_KEY = ""
 
 def load_config():
   global OPENAI_API_KEY
   print(f"Starting the app")
-  config = Config("apps/ch02/config.yaml")
+  config = Config("./resources/config.yaml")
   OPENAI_API_KEY = config.config["openai"]["apikey"]
   print(f"loaded API Key: {OPENAI_API_KEY}")
 
